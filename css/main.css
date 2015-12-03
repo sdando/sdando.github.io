@@ -1,0 +1,277 @@
+
+body, div, p {
+  padding: 0;
+  margin: 0;
+}
+* {
+  transition: all 0.3s;
+}
+.hot-area, .hot-arealine {
+  transition: none;
+}
+body {
+  font-family: consolas, "Microsoft Yahei";
+  -webkit-user-select: none;
+}
+input:focus {
+  outline: none;
+}
+.header {
+  text-align: center;
+  line-height: 60px;
+  font-size: 20px;
+  background-color: #F5F5F5;
+  color: #F40;
+  border-bottom: 1px solid #CCC;
+  box-shadow: 0 3px 3px #EEE;
+}
+.demo {
+  margin-left: 10px;
+  font-size: 14px;
+  display: inline-block;
+  color: #F40;
+  text-decoration: none;
+}
+.demo:hover {
+  background-color: #F40;
+  color: #FFF;
+}
+.helper {
+  background-color: #F5F5F5;
+  padding: 15px 20px;
+  margin-bottom: 40px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 1px #FFF,5px 5px 5px #CCC;
+}
+.helper h3 {
+  margin-bottom: 0;
+}
+.helper ul {
+  list-style: none;
+}
+.container {
+  width: 1190px;
+  margin: 30px auto;
+}
+.operations {
+  text-align: right;
+  visibility: hidden;
+}
+.operations span {
+  font-size: 14px;
+  display: inline-block;
+  background-color: #FF8A5F;
+  color: #FFF;
+  padding: 4px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.operations span:hover, .operations span.on {
+  background-color: #F40;
+  box-shadow: 1px 1px 1px #FFF, 1px 1px 3px #F40;
+}
+.operations .opAdd {
+  background-color: #5EC9FF;
+}
+.operations .opAdd.on, .operations .opAdd:hover {
+  background-color: #1FB4FF;
+  box-shadow: 1px 1px 1px #FFF,  1px 1px 3px #1FB4FF;
+}
+.hot-targetPannel {
+  position: relative;
+  border: 1px dotted #6A6A6A;
+  background-color: #FAFAFA;
+  padding: 40px 0;
+  margin-top: 20px;
+  margin-top: 90px;
+  min-height: 40px;
+}
+.hot-imgInput {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -300px;
+  margin-top: -12px;
+}
+.hot-imgInputFull {
+  left: 0;
+  top: -52px;
+  margin: 0;
+}
+.hot-img-wrapper {
+  margin: 0 auto;
+  position: relative;
+}
+.hot-img-wrapper img {
+  cursor: crosshair;
+  opacity: 0.5;
+}
+/* input */
+.hot-img-url {
+  border: none;
+  border-bottom: 1px solid #CCC;
+  height: 18px;
+  line-height: 18px;
+  text-indent: 3px;
+  width: 600px;
+  text-align: center;
+  font-size: 14px;
+  color: #F40;
+  text-overflow: ellipsis;
+}
+
+/* area */
+.hot-area {
+  position: absolute;
+  min-height: 10px;
+  min-width: 10px;
+  cursor: move;
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0px 0px 5px #000;
+}
+.hot-area i {
+  position: absolute;
+  border: 1px solid #555;
+  background-color: #FFF;
+}
+.hot-area i:hover {
+  background-color: #FFA483;
+}
+.hot-area .atop, .hot-area .abottom {
+  left: 50%;
+  right: 0;
+  width: 100%;
+  height: 6px;
+  width: 6px;
+  margin-left: -4px;
+}
+.hot-area .atop {
+  top: -3px;
+  cursor: ns-resize;
+}
+.hot-area .abottom {
+  bottom: -3px;
+  cursor: ns-resize;
+}
+.hot-area .aleft, .hot-area .aright {
+  top: 50%;
+  margin-top: -5px;
+  bottom: 0;
+  height: 6px;
+  width: 6px;
+}
+.hot-area .aleft {
+  left: -3px;
+  cursor: ew-resize;
+}
+.hot-area .aright {
+  right: -3px;
+  cursor: ew-resize;
+}
+.hot-area .hot-info {
+  position: absolute;
+  width: 80px;
+  height: 0;
+  opacity: 0;
+  font-size: 12px;
+  right: -94px;
+  top: 0;
+  background-color: rgba(85, 85, 85, 0.9);
+  color: #FFF;
+  padding: 5px;
+  z-index: -1;
+  box-shadow: 1px 1px 0px #C2C2C2, 3px 3px 3px #888;
+}
+.hot-area .info:hover, .hot-area:hover .info:hover {
+  display: none;
+}
+.hot-area:hover .info {
+  height: 68px;
+  opacity: 1;
+  z-index: 1;
+}
+.hot-area .hot-area-id {
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  font-size: 9px;
+  background-color: #FFA483;
+  color: #872A2A;
+  padding: 2px 4px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.hot-area .hot-close {
+  position: absolute;
+  right: -15px;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  font-size: 10px;
+  text-align: center;
+  border: 1px solid #000;
+  color: #EEE;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  display: none;
+}
+.hot-area .hot-close:hover {
+  background-color: #000;
+  color: #FFF;
+}
+.hot-area:hover i, .hot-area:hover .hot-close {
+  display: block;
+}
+/*hot-controller*/
+.hot-controller {
+  margin-top: 30px;
+}
+.hot-controller-box {
+  margin: 15px 0;
+}
+.hot-controller-box p {
+  line-height: 24px;
+  font-size: 12px;
+  padding-left: 15px;
+}
+.hot-controller-box input {
+  width: 80px;
+  text-align: center;
+  font-size: 14px;
+  font-family: consolas;
+}
+/*hot-result*/
+.hot-result {
+  margin-top: 30px;
+}
+.hot-tabs span {
+  font-size: 14px;
+  display: inline-block;
+  background-color: #F40;
+  color: #FFF;
+  padding: 4px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.hot-tabs span:hover, .hot-tabs span.on {
+  background-color: #1FB4FF;
+  box-shadow: 1px 1px 1px #FFF, 1px 1px 3px #F40;
+}
+.pbox {
+  display: none;
+  margin-top: 10px;
+}
+.pbox p {
+  line-height: 32px;
+  font-size: 12px;
+}
+.pbox textarea {
+  display: block;
+  width: 1170px;
+  min-height: 200px;
+  overflow-x: hidden;
+  font-size: 12px;
+  padding: 10px;
+  font-family: consolas;
+}

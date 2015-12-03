@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="author" content="bogao" />
+  <meta name="email" content="zjutzx@gmail.com" />
+  <title>热区控制|运营辅助工具</title>
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+<div class="header">图片点击热区生成工具</div>
+
+<div class="container">
+
+  <div class="helper">
+    <h3>操作提示</h3>
+    <ul>
+      <li>1. 更换图片地址</li>
+      <li>2. 在图片区域绘制矩形</li>
+      <li>3.『热区数据』可以拿到热区信息</li>
+    </ul>
+  </div>
+
+  <!-- 操作容器 -->
+  <div class="hot-targetPannel">
+    <div class="hot-imgInput hot-imgInputFull">
+      <label for="hot-imgUrl">更换图片地址: </label>
+      <input type="text" name="hot-imgUrl" class="hot-img-url" id="hot-imgUrl" placeholder="http://" />
+    </div>
+    <div class="hot-img-wrapper"><img ondragstart="return false;" /></div>
+  </div>
+
+  <!-- 预览 -->
+  <div class="hot-result">
+    <div class="hot-tabs">
+      <span class="hot-data">热区数据</span>
+    </div>
+  </div>
+
+  <div class="pbox" style="display:block">
+    <textarea></textarea>
+  </p></div>
+
+</div>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/css/main.js"></script>
+</body>
+</html>
