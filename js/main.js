@@ -85,7 +85,11 @@ function capture(el) {
       var pos = $(this).attr("id").match(/\d+$/);
       var newLeft = e.pageX - iX + rec[pos].startX - left;
       var newTop = e.pageY - iY + rec[pos].startY - top;
-      $(this).css({"left":newLeft, "top":newTop});
+      //判断是否在边界中
+      if((newLeft >= 0 && newLeft <= width * (1- results[pos].split(" ")[1].split("%")[0] / 100)) && 
+        (newTop >= 0 && newTop <= height * (1 - results[pos].split(" ")[2].split("%")[0] / 100))) {
+        $(this).css({"left":newLeft, "top":newTop});
+      }
       return false;
     }
   }
@@ -105,7 +109,7 @@ function capture(el) {
     }
     else {
       result['left'] = (((startX - left) / width) * 100).toFixed(2) + "%";
-      result['top'] = (((startY - top) / height)* 100).toFixed(2) + "%"
+      result['top'] = (((startY - top) / height)* 100).toFixed(2) + "%";
       result['width'] = results[index].split(" ")[1];
       result['height'] = results[index].split(" ")[2];
     }
@@ -118,7 +122,7 @@ function capture(el) {
       results.splice(pos, 1, "");
     }
     else {
-      var line = "# " + result.width + " " + result.height + " " + result.left + " " + result.top;
+      var line = "# " + result.width + " " + result.height + " " + result.left + " " + result.top; 
       if(pos > -1) {
         results.splice(pos, 1, line);
       }
