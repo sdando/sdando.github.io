@@ -1,10 +1,14 @@
 $(document).ready(function() {
 
+  capture(".hot-img-wrapper img");
   $("#hot-imgUrl").blur(function(){
     var imgUrl = this.value;
     if(imgUrl) {
+      $(".close").trigger("click");
+      if(!/^http:/.test(imgUrl)) {
+        imgUrl = "http:" + imgUrl;
+      }
       $(".hot-img-wrapper img").attr("src", imgUrl);
-      capture(".hot-img-wrapper img");
     }
   });
 
@@ -27,18 +31,21 @@ function capture(el) {
     isDown = true;
     rec.push({startX: e.pageX, startY: e.pageY});
     makeDot(e.pageX - left, e.pageY - top, index);
+    return false;
   });
 
   $(el).mousemove(function(e) {
     if(isDown) {
        makeRet((e.pageX - rec[index].startX) + "px", (e.pageY - rec[index].startY) + "px", index)
     }
+    return false;
   });
 
   $(el).mouseup(function(e) {
 	  isDown = false;
     setVaule(-1, updateResult(-1, rec[index].startX, rec[index].startY, e.pageX, e.pageY));
     index++;
+    return false;
   });
 
   function makeDot(x, y, index) {
@@ -48,11 +55,12 @@ function capture(el) {
     $(el).parent().append(pointDiv);
 
     //设置点击x按钮时删除事件
-    pointDiv.children('.close').click(function() {
+    pointDiv.children('.close').click(function(e) {
       $parent = $(this).parent();
       var pos = $parent.attr("id").match(/\d+$/);
       setVaule(pos, null);
       $parent.remove();
+      return false;
     });
 
     //区域拖曳实现
@@ -62,7 +70,7 @@ function capture(el) {
       iY = e.pageY;
       $(this).css("border", "2px solid #eaeaea");
       $(this).bind("mousemove", onMouseMove);
-      e.stopPropagation();
+      return false;
     });
     pointDiv.mouseup(function(e) {
        $(this).unbind("mousemove",onMouseMove);
@@ -71,14 +79,14 @@ function capture(el) {
        rec[pos].startX = e.pageX - iX + rec[pos].startX;
        rec[pos].startY = e.pageY - iY + rec[pos].startY;
        setVaule(pos, updateResult(pos, rec[pos].startX, rec[pos].startY));
-       e.stopPropagation();
+       return false;
     });
     function onMouseMove(e) {
       var pos = $(this).attr("id").match(/\d+$/);
       var newLeft = e.pageX - iX + rec[pos].startX - left;
       var newTop = e.pageY - iY + rec[pos].startY - top;
       $(this).css({"left":newLeft, "top":newTop});
-      e.stopPropagation();
+      return false;
     }
   }
 
