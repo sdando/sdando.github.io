@@ -1,10 +1,10 @@
 $(document).ready(function() {
-
   capture(".hot-img-wrapper img");
   $("#hot-imgUrl").blur(function(){
     var imgUrl = this.value;
     if(imgUrl) {
       $(".close").trigger("click");
+      index = 0;
       if(!/^http:/.test(imgUrl)) {
         imgUrl = "http:" + imgUrl;
       }
@@ -16,9 +16,10 @@ $(document).ready(function() {
 
 function capture(el) {
   var isDown = false;
-  var index = 0;
+  var isMouseMove = false;
   //被选区域在DOM中的位置及长宽
-  var top,left,width,height;
+  var top,left,maxTop,maxLeft,width,height;
+  var index = 0;
   var results = [];
   //保存每个矩形的位置
   var rec = [];
@@ -28,6 +29,8 @@ function capture(el) {
     left = $(el).offset().left;
     width = $(el).width();
     height = $(el).height();
+    maxTop = top + height;
+    maxLeft = left + width;
     isDown = true;
     rec.push({startX: e.pageX, startY: e.pageY});
     makeDot(e.pageX - left, e.pageY - top, index);
@@ -36,15 +39,25 @@ function capture(el) {
 
   $(el).mousemove(function(e) {
     if(isDown) {
+       isMouseMove = true;
        makeRet((e.pageX - rec[index].startX) + "px", (e.pageY - rec[index].startY) + "px", index)
     }
     return false;
   });
 
-  $(el).mouseup(function(e) {
-	  isDown = false;
-    setVaule(-1, updateResult(-1, rec[index].startX, rec[index].startY, e.pageX, e.pageY));
-    index++;
+  $(document).mouseup(function(e) {
+    if(isDown && isMouseMove) {
+	    isDown = false;
+      isMouseMove = false;
+      $close = $("#rectangle-" + index).children('.close');
+       if($close.css('display') == 'none') {
+          $close.css('display', 'block');
+       }
+      var endX = e.pageX > maxLeft ? maxLeft: e.pageX;
+      var endY = e.pageY > maxTop ? maxTop: e.pageY;
+      setVaule(-1, updateResult(-1, rec[index].startX, rec[index].startY, endX, endY));
+      index++;
+    } 
     return false;
   });
 
